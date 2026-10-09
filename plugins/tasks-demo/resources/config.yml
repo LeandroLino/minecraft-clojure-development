@@ -1,0 +1,4 @@
+tasks-demo:
+  announce-message: "[tasks-demo] Remember to stay hydrated!"
+  announce-delay-seconds: 10
+  announce-interval-seconds: 60

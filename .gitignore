@@ -1,0 +1,14 @@
+# Build output and caches
+target/
+.m2/
+pom.xml
+.nrepl-port
+
+# Portable JDK (see README, Requirements)
+tools/
+
+# Server: keep only the launch scripts and server.properties
+server/*
+!server/start.ps1
+!server/start.bat
+!server/server.properties

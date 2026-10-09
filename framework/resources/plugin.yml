@@ -1,0 +1,5 @@
+name: paperclj
+version: 0.1.0
+main: dev.paperclj.PaperCljPlugin
+api-version: "26.2"
+description: "Shared Clojure runtime, DSL and optional nREPL for Clojure plugins"

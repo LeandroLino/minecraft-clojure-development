@@ -1,0 +1,6 @@
+name: hello
+version: 0.1.0
+main: example.hello.HelloPlugin
+api-version: "26.2"
+depend: [paperclj]
+description: "Example: /hello command"

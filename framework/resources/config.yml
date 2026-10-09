@@ -1,0 +1,4 @@
+# One nREPL server for the whole shared Clojure runtime. Bound to 127.0.0.1 only.
+nrepl:
+  enabled: true
+  port: 7888

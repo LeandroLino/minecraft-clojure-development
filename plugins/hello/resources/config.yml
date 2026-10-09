@@ -1,0 +1,3 @@
+# {player} is replaced by the name given to /hello, or the sender's name.
+hello:
+  message: "Hello, {player}! Welcome to the server."

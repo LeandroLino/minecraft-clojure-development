@@ -1,0 +1,3 @@
+# {player} = player name, {count} = how many times they have joined (this one included).
+join-greeter:
+  message: "Welcome, {player}! This is your visit number {count}."

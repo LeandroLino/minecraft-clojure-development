@@ -1,0 +1,6 @@
+name: join-greeter
+version: 0.1.0
+main: example.join_greeter.JoinGreeterPlugin
+api-version: "26.2"
+depend: [paperclj]
+description: "Example: join listener with persisted counter"
