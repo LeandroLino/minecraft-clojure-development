@@ -1,0 +1,118 @@
+# All texts here are MiniMessage (https://docs.advntr.dev/minimessage/format.html).
+#
+# Placeholders, written as tags:
+#   <player>   the player's name          <online> / <max>   players online / slots
+#   <rank>     rank name (ranks module)   <prefix>           rank prefix, with its colours
+#   <balance>  money (economy module)     <tps>              server ticks per second
+# Names, ranks and money are inserted as plain text; only <prefix> carries formatting.
+
+chat:
+  # <message> is what the player typed, inserted as plain text.
+  format: "<prefix> <white><player></white><dark_gray> » </dark_gray><gray><message></gray>"
+
+join:
+  message: "<green>+ <white><player></white> entrou"
+  first-message: "<gold>★ <white><player></white> entrou pela primeira vez!"
+
+quit:
+  message: "<red>- <white><player></white> saiu"
+
+welcome:
+  # Lines sent to the player who joins.
+  lines:
+    - ""
+    - "<gradient:green:aqua><bold>Bem-vindo ao servidor, <player>!</bold></gradient>"
+    - "<gray>Divirta-se e respeite os outros jogadores."
+    - "<gray>Comandos úteis: <white>/balance</white>, <white>/rank</white>, <white>/sethome</white>, <white>/tpa</white>"
+    - ""
+  title: "<gradient:green:aqua>Servidor</gradient>"
+  subtitle: "<gray>Boa sorte, <player>!"
+  # How long the title takes to fade in, stay and fade out, in ticks (20 ticks = 1 second).
+  title-fade-in-ticks: 10
+  title-stay-ticks: 70
+  title-fade-out-ticks: 20
+
+tab:
+  enabled: true
+  refresh-seconds: 5
+  header: "<gradient:green:aqua><bold>Servidor</bold></gradient>"
+  footer: "<gray>Online: <white><online>/<max></white> <dark_gray>|</dark_gray> <gray>TPS: <white><tps></white>"
+  # How each player appears in the tab list.
+  name-format: "<prefix> <white><player></white>"
+
+scoreboard:
+  enabled: true
+  refresh-seconds: 2
+  title: "<gradient:green:aqua><bold>Servidor</bold></gradient>"
+  # At most 15 lines, top to bottom. An empty line is a blank row.
+  lines:
+    - "<gray>Jogador: <white><player>"
+    - "<gray>Rank: <white><rank>"
+    - "<gray>Saldo: <green><balance>"
+    - ""
+    - "<gray>Online: <white><online>/<max>"
+
+death:
+  # false: keep the game's own death messages.
+  enabled: true
+  # One of these is drawn at random when a player dies. The category depends on what killed them:
+  #   fall, lava, fire, drown, void, explosion, cactus, starve, magic, freeze  the cause
+  #   pvp   killed by a player: <killer> is their name
+  #   mob   killed by a creature: <killer> is its name
+  #   generic  anything else
+  # <player> is who died. A category with no list uses `fallback`. PROVISIONAL texts, to be
+  # rewritten by the server owner.
+  messages:
+    fall:
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>caiu de alto demais"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>esqueceu que o chão existe"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>achou que sabia voar"
+    lava:
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>tentou nadar na lava"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>virou churrasco"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>achou a lava quentinha demais"
+    fire:
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>pegou fogo"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>virou cinzas"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>não apagou o fogo a tempo"
+    drown:
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>ficou sem ar"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>se afogou"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>esqueceu de respirar"
+    void:
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>caiu no vazio"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>deu um passo para o nada"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>errou o bloco"
+    explosion:
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>explodiu"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>virou confete"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>estava perto demais da explosão"
+    cactus:
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>abraçou um cacto"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>se espetou até morrer"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>perdeu para um espinho"
+    starve:
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>morreu de fome"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>esqueceu de comer"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>passou fome demais"
+    magic:
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>foi vítima de magia"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>bebeu a poção errada"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>não resistiu a um feitiço"
+    freeze:
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>congelou"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>virou uma estátua de gelo"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>sentiu frio demais"
+    pvp:
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>foi derrotado por</gray> <white><killer></white>"
+      - "<dark_red>☠</dark_red> <white><killer></white> <gray>acabou com</gray> <white><player></white>"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>perdeu a luta contra</gray> <white><killer></white>"
+    mob:
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>foi morto por</gray> <white><killer></white>"
+      - "<dark_red>☠</dark_red> <white><killer></white> <gray>pegou</gray> <white><player></white>"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>não escapou de</gray> <white><killer></white>"
+    generic:
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>morreu"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>não resistiu"
+      - "<dark_red>☠</dark_red> <white><player></white> <gray>se foi desta para melhor"
+  fallback: "<dark_red>☠</dark_red> <white><player></white> <gray>morreu"

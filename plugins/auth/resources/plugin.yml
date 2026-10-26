@@ -1,0 +1,6 @@
+name: auth
+version: 0.1.0
+main: dev.paperclj.auth.AuthPlugin
+api-version: "26.2"
+depend: [skycore]
+description: "Login and registration: nobody plays before proving who they are"

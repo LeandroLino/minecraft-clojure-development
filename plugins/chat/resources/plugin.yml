@@ -1,0 +1,7 @@
+name: chat
+version: 0.1.0
+main: dev.paperclj.chat.ChatPlugin
+api-version: "26.2"
+depend: [skycore]
+softdepend: [ranks, economy, admin, auth]
+description: "Formatted chat, tab list, sidebar scoreboard and welcome messages"

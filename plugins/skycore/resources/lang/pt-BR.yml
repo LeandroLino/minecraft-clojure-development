@@ -1,0 +1,11 @@
+# Messages use MiniMessage. {name} placeholders are filled by the code; {prefix} is the prefix below.
+prefix: "<gray>[<gradient:green:aqua>Sky</gradient>]</gray> "
+
+core:
+  player-only: "{prefix}<red>Este comando só pode ser usado por jogadores."
+  no-permission: "{prefix}<red>Você não tem permissão para isso."
+  usage: "{prefix}<yellow>Uso: <white>{usage}"
+  error: "{prefix}<red>Ocorreu um erro ao executar o comando. Avise um administrador."
+  player-not-found: "{prefix}<red>Jogador <white>{player}<red> não encontrado."
+  invalid-number: "{prefix}<red><white>{value}<red> não é um número válido."
+  data-error: "<red>Não foi possível carregar seus dados. Tente entrar de novo em instantes."

@@ -1,0 +1,19 @@
+name: economy
+version: 0.1.0
+main: dev.paperclj.economy.EconomyPlugin
+api-version: "26.2"
+depend: [skycore]
+description: "Currency, balances and /pay for a Paper server"
+permissions:
+  economy.balance:
+    description: "See your own balance (/balance)"
+    default: true
+  economy.balance.others:
+    description: "See another player's balance (/balance <player>)"
+    default: op
+  economy.pay:
+    description: "Send currency to another player (/pay)"
+    default: true
+  economy.admin:
+    description: "Give, take or set balances (/eco)"
+    default: op

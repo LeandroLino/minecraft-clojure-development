@@ -1,0 +1,12 @@
+homes:
+  # How many homes a player may have when the ranks module gives no "homes" limit.
+  default-limit: 1
+  # Name used when /sethome or /home gets no name.
+  default-name: home
+
+# Longest name allowed for homes and warps (letters, digits, - and _).
+name-max-length: 16
+
+tpa:
+  # A teleport request stops being valid after this many seconds.
+  expire-seconds: 60

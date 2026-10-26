@@ -1,0 +1,15 @@
+# How the currency is shown in messages.
+currency:
+  name-singular: moeda
+  name-plural: moedas
+  symbol: "$"
+
+# What a player who joins for the first time starts with.
+starting-balance: 100
+
+# Largest balance an account may hold. Deposits above it are refused.
+max-balance: 1000000000000
+
+pay:
+  # Smallest amount /pay accepts.
+  min-amount: 1

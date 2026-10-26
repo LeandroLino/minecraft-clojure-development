@@ -1,0 +1,20 @@
+name: teleport
+version: 0.1.0
+main: dev.paperclj.teleport.TeleportPlugin
+api-version: "26.2"
+depend: [skycore]
+softdepend: [ranks, auth]
+description: "Homes, warps and teleport requests (tpa)"
+permissions:
+  teleport.home:
+    description: "Set, use and delete your homes (/sethome, /home, /delhome, /homes)"
+    default: true
+  teleport.warp:
+    description: "Use warps (/warp, /warps)"
+    default: true
+  teleport.warp.set:
+    description: "Create and delete warps (/setwarp, /delwarp)"
+    default: op
+  teleport.tpa:
+    description: "Request and answer teleports (/tpa, /tpahere, /tpaccept, /tpdeny, /tpcancel)"
+    default: true
