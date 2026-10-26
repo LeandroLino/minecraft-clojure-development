@@ -5,6 +5,9 @@ import clojure.lang.IFn;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -48,10 +51,24 @@ public abstract class ClojurePlugin extends JavaPlugin {
         }
     }
 
+    /** Loaders of the plugins listed under "depend", except paperclj itself (the shared loader). */
+    private List<ClassLoader> dependencyLoaders() {
+        ClassLoader shared = ClojurePlugin.class.getClassLoader();
+        List<ClassLoader> loaders = new ArrayList<>();
+        for (String name : getPluginMeta().getPluginDependencies()) {
+            Plugin dependency = getServer().getPluginManager().getPlugin(name);
+            if (dependency != null && dependency.getClass().getClassLoader() != shared) {
+                loaders.add(dependency.getClass().getClassLoader());
+            }
+        }
+        return loaders;
+    }
+
     private void withPluginLoader(Runnable body) {
         Thread thread = Thread.currentThread();
         ClassLoader previous = thread.getContextClassLoader();
-        thread.setContextClassLoader(new PluginLoader(getClassLoader(), ClojurePlugin.class.getClassLoader()));
+        thread.setContextClassLoader(
+                new PluginLoader(getClassLoader(), dependencyLoaders(), ClojurePlugin.class.getClassLoader()));
         try {
             body.run();
         } finally {

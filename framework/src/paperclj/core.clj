@@ -82,28 +82,63 @@
 
 (defn- unregister-command! [name]
   (when-let [^Command old (registered :commands name)]
-    (.unregister old (Bukkit/getCommandMap))
+    (let [command-map (Bukkit/getCommandMap)
+          ^java.util.Map known (.getKnownCommands command-map)]
+      ;; Command.unregister only detaches the command; the map keeps every
+      ;; label and alias pointing at it, so remove those entries too.
+      (.unregister old command-map)
+      (.removeIf (.values known) (reify java.util.function.Predicate
+                                   (test [_ c] (identical? c old)))))
     (swap! registry* update-in [(plugin-name) :commands] dissoc name)))
 
 (defn register-command!
   "Register command `name`. `handler` is (fn [sender args]) with args a vector
-  of strings; return false to show the usage."
-  [^String name handler]
-  (unregister-command! name)
-  (let [handler (bound-fn* handler)
-        cmd (proxy [Command] [name]
-              (execute [sender _label args]
-                (not (false? (handler sender (vec args))))))]
-    (.register (Bukkit/getCommandMap) (plugin-name) cmd)
-    (register-in! :commands name cmd)
-    name))
+  of strings; return false to show the usage.
+
+  `opts` (all optional):
+    :permission   permission node; senders without it get the permission message
+    :permission-message  Component sent to senders without the permission
+    :aliases      seq of alternative names
+    :description  help text
+    :usage        usage text shown when the handler returns false
+    :complete     (fn [sender args]) -> seq of tab-completion candidates"
+  ([^String name handler] (register-command! name {} handler))
+  ([^String name {:keys [permission permission-message aliases description usage complete]} handler]
+   (unregister-command! name)
+   (let [handler (bound-fn* handler)
+         complete (some-> complete bound-fn*)
+         ^Command cmd (proxy [Command] [name]
+                        (execute [sender _label args]
+                          (if (.testPermission ^Command this sender)
+                            (not (false? (handler sender (vec args))))
+                            true))
+                        (tabComplete
+                          ([sender _alias args]
+                           (if (and complete (.testPermissionSilent ^Command this sender))
+                             (java.util.ArrayList. ^java.util.Collection (complete sender (vec args)))
+                             (java.util.ArrayList.)))
+                          ([sender alias args _location]
+                           (.tabComplete ^Command this sender alias args))))]
+     (when permission (.setPermission cmd permission))
+     (when permission-message (.permissionMessage cmd ^Component permission-message))
+     (when aliases (.setAliases cmd (vec aliases)))
+     (when description (.setDescription cmd description))
+     (when usage (.setUsage cmd usage))
+     (.register (Bukkit/getCommandMap) (plugin-name) cmd)
+     (register-in! :commands name cmd)
+     name)))
 
 (defmacro defcommand
   "(defcommand hello [sender args] ...) registers /hello when evaluated, so
-  place it inside the enable body (a nREPL reload re-registers it)."
-  [cmd-name [sender args] & body]
-  `(register-command! ~(name cmd-name)
-                      (fn [~sender ~args] ~@body)))
+  place it inside the enable body (a nREPL reload re-registers it).
+  An options map (see register-command!) may come before the arguments:
+  (defcommand hello {:permission \"hello.use\"} [sender args] ...)"
+  [cmd-name & more]
+  (let [[opts [[sender args] & body]] (if (map? (first more))
+                                        [(first more) (rest more)]
+                                        [{} more])]
+    `(register-command! ~(name cmd-name) ~opts
+                        (fn [~sender ~args] ~@body))))
 
 ;; ---------------------------------------------------------------- events
 
@@ -118,7 +153,9 @@
    (let [handler (bound-fn* handler)
          listener (reify Listener)
          executor (reify EventExecutor
-                    (execute [_ _ event] (handler event)))]
+                    ;; Bukkit shares one handler list between an event and its subclasses (every
+                    ;; EntityDeathEvent reaches a PlayerDeathEvent listener), so check the class here
+                    (execute [_ _ event] (when (.isInstance event-class event) (handler event))))]
      (.registerEvent (Bukkit/getPluginManager) event-class listener priority executor (plugin))
      (register-in! :listeners key listener)
      key)))
