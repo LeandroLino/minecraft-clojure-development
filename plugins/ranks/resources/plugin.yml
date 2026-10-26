@@ -1,0 +1,13 @@
+name: ranks
+version: 0.1.0
+main: dev.paperclj.ranks.RanksPlugin
+api-version: "26.2"
+depend: [skycore, economy]
+description: "Purchasable rank ladder with prefixes, permissions and limits"
+permissions:
+  ranks.use:
+    description: "See ranks and buy the next one (/rank, /rank list, /rank up)"
+    default: true
+  ranks.admin:
+    description: "Set a player's rank without paying (/rank set)"
+    default: op

@@ -1,0 +1,12 @@
+# Language of the messages of every module: file lang/<language>.yml in each module.
+language: pt-BR
+
+# Extra log lines (skycore.log/debug) for every module.
+debug: false
+
+# SQLite (one database file per module, in the module's data folder).
+db:
+  # How long SQLite waits for a lock before failing a statement.
+  busy-timeout-ms: 5000
+  # How long disabling a module waits for its pending writes to be flushed.
+  close-timeout-seconds: 10

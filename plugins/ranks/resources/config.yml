@@ -1,0 +1,41 @@
+# The rank ladder, lowest first. Everyone starts on the first rank (its price must be 0) and
+# buys the next one with /rank up.
+#
+#   id           short name used by commands and in the database (never change it afterwards)
+#   name         name shown to players
+#   prefix       MiniMessage text shown before the name in chat and the player list
+#   price        what /rank up costs to reach this rank
+#   permissions  permission nodes granted at this rank AND every rank above it
+#   limits       numbers other modules read for this player, e.g. homes. A rank's value
+#                replaces the one from lower ranks; a limit it does not mention carries over.
+ranks:
+  - id: novato
+    name: Novato
+    prefix: "<gray>[Novato]</gray>"
+    price: 0
+    permissions: []
+    limits: { homes: 2 }
+  - id: aventureiro
+    name: Aventureiro
+    prefix: "<green>[Aventureiro]</green>"
+    price: 500
+    permissions: []
+    limits: { homes: 4 }
+  - id: veterano
+    name: Veterano
+    prefix: "<aqua>[Veterano]</aqua>"
+    price: 2500
+    permissions: []
+    limits: { homes: 6 }
+  - id: lenda
+    name: Lenda
+    prefix: "<gold>[Lenda]</gold>"
+    price: 10000
+    permissions: []
+    limits: { homes: 10 }
+  - id: ultimate
+    name: Ultimate
+    prefix: "<green>[Ultimate]</green>"
+    price: 100000
+    permissions: []
+    limits: { homes: 10 }

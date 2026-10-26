@@ -1,0 +1,13 @@
+backup:
+  # Back up the worlds and the modules' data on a schedule. /sky backup now runs one by hand.
+  enabled: true
+  # Minutes between automatic backups (the first one runs after one interval).
+  interval-minutes: 30
+  # How many backups to keep; older ones are deleted after each new backup.
+  keep: 24
+  # Folder for the backups, inside the server folder.
+  directory: backups
+  # Also back up everything under plugins/<module>/ (configs and databases).
+  include-plugin-data: true
+  # Backups shown by /sky backup list (the newest ones).
+  list-limit: 10

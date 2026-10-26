@@ -1,0 +1,35 @@
+name: admin
+version: 0.1.0
+main: dev.paperclj.admin.AdminPlugin
+api-version: "26.2"
+depend: [skycore]
+softdepend: [auth]
+description: "Admin commands and scheduled world and data backups"
+permissions:
+  admin.status:
+    description: "See server health (/sky status)"
+    default: op
+  admin.backup:
+    description: "Run and list backups (/sky backup)"
+    default: op
+  admin.broadcast:
+    description: "Announce a message to everyone (/sky broadcast)"
+    default: op
+  admin.fly:
+    description: "Turn flight on or off for yourself or another player (/sky fly)"
+    default: op
+  admin.heal:
+    description: "Restore health and food of yourself or another player (/sky heal)"
+    default: op
+  admin.vanish:
+    description: "Hide yourself or another player from everyone else (/sky vanish)"
+    default: op
+  admin.vanish.see:
+    description: "See players that are vanished"
+    default: op
+  admin.mute:
+    description: "Silence and unsilence players in chat (/sky mute, /sky unmute)"
+    default: op
+  admin.senha:
+    description: "Change a player's password (/sky senha)"
+    default: op

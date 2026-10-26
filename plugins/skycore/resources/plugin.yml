@@ -1,0 +1,6 @@
+name: skycore
+version: 0.1.0
+main: dev.paperclj.skycore.SkycorePlugin
+api-version: "26.2"
+depend: [paperclj]
+description: "Shared core: config, pt-BR messages, command/event/scheduler wrappers, SQLite, services"

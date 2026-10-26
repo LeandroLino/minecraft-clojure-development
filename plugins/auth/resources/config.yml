@@ -1,0 +1,20 @@
+# Login and registration. Accounts and password hashes are kept in plugins/auth/auth.db.
+
+password:
+  # Shortest and longest password /register accepts, in characters.
+  min-length: 6
+  max-length: 64
+  # PBKDF2-HMAC-SHA256 iterations. Higher is slower to crack and slower to check (about 60 ms at
+  # 120000). Changing it only affects new passwords; each stored hash remembers its own count.
+  hash-iterations: 120000
+
+login:
+  # Seconds a player has to log in or register before being kicked.
+  timeout-seconds: 60
+  # Wrong passwords before being kicked.
+  max-attempts: 3
+  # Minutes during which a player who left logged in is let straight in again when they come
+  # back from the same address. Kept in memory only: restarting the server forgets it.
+  remember-minutes: 5
+  # Seconds between the reminders on the action bar.
+  reminder-seconds: 5
